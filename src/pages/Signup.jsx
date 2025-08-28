@@ -31,6 +31,7 @@ const Signup = () => {
     if (fullname && email && password & cpassword) {
       if (password === cpassword) {
         // const auth = getAuth();
+
         createUserWithEmailAndPassword(auth, email, password)
           .then(async (userCredential) => {
             // Signed in
@@ -39,15 +40,12 @@ const Signup = () => {
             setemail("");
             setpassword("");
             setcpassword("");
-
             // Add a new document in collection "cities"
             await setDoc(doc(db, "students", user.uid), {
               fullname: fullname,
               email: email,
               userid: user.uid,
             });
-
-            // ...
           })
           .catch((error) => {
             const errorCode = error.code;
@@ -63,14 +61,6 @@ const Signup = () => {
 
     // Validation
   };
-
-
-
-
-
-
-
-
 
   console.log(fullname);
   console.log(email);
