@@ -1,0 +1,22 @@
+.inputrow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.passwordhandler{
+    background-color: dodgerblue;
+    color: white;
+    font-size: 8px !important;
+    border-radius: 5px;
+  
+    position: absolute;
+    right: 5px;
+    padding: 1px !important;
+}
+
+input{
+    width: 100%;
+}
+

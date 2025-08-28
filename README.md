@@ -1,0 +1,1 @@
+run npm i command on root file after that you will receive nodemodule folder then run just npm run dev command
