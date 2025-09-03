@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Header from "../components/Nabar";
+import MyContext from "../context/MyContext";
 
 const Home = () => {
+  const { firstname, lastname, email, password } = useContext(MyContext);
+  
   return (
     <>
       {/* <Header /> */}
@@ -12,7 +15,9 @@ const Home = () => {
           <Container>
             <Row className="justify-content-center text-center">
               <Col lg={8}>
-                <h1 className="display-4 fw-bold mb-3">Welcome to Student Portal</h1>
+                <h1 className="display-4 fw-bold mb-3">
+                  Welcome to Student Portal
+                </h1>
                 <p className="lead mb-4">
                   Your gateway to academic excellence and student services
                 </p>
@@ -32,10 +37,18 @@ const Home = () => {
           <Row className="text-center mb-4">
             <Col>
               <h2 className="fw-bold">Student Services</h2>
-              <p className="text-muted">Access all your academic needs in one place</p>
+              <p className="text-muted">
+                Access all your academic needs in one place
+              </p>
+              <p className="text-muted">First Name:{firstname}</p>
+              <p className="text-muted">Last Name:{lastname}</p>
+              <p className="text-muted">email:{email}</p>
+              <p className="text-muted">password:{password}</p>
+
+              <input type="password" value={password}  disabled/>
             </Col>
           </Row>
-          
+
           <Row className="g-4">
             <Col xs={12} sm={6} md={3}>
               <Card className="h-100 text-center shadow-sm">
@@ -75,7 +88,8 @@ const Home = () => {
                   </div>
                   <Card.Title>Grades</Card.Title>
                   <Card.Text>
-                    Track your academic performance and view detailed grade reports.
+                    Track your academic performance and view detailed grade
+                    reports.
                   </Card.Text>
                   <Button variant="outline-warning">View Grades</Button>
                 </Card.Body>
@@ -131,7 +145,7 @@ const Home = () => {
                 </Card.Body>
               </Card>
             </Col>
-            
+
             <Col md={4}>
               <Card className="shadow-sm">
                 <Card.Body>

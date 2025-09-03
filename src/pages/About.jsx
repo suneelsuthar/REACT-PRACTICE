@@ -1,17 +1,50 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Header from "../components/Nabar";
+import MyContext from "../context/MyContext";
 
 const About = () => {
+  const { name, num, course, setnum, requests } = useContext(MyContext);
+
+  c
+
   return (
     <>
       <Header />
       <Container className="mt-5">
+        <h1>Requests</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {requests.map((request, index) => (
+              <tr key={index}>
+                <td>{request.name}</td>
+                <td>{request.email}</td>
+                <td>{request.address}</td>
+                <td>{request.phone}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         {/* About Section */}
         <Row className="justify-content-center mb-5">
           <Col lg={8}>
             <div className="text-center mb-4">
-              <h1 className="display-4 fw-bold text-primary">About Student Portal</h1>
+              <h1 className="display-4 fw-bold text-primary">{name}</h1>
+              <h1 className="display-4 fw-bold text-primary">{num}</h1>
+              <h1 className="display-4 fw-bold text-primary">{course}</h1>
+
+              <button onClick={() => setnum(num + 1)}>+</button>
+              <span>{num}</span>
+              <button onClick={() => setnum(num - 1)}>-</button>
+
               <p className="lead text-muted">
                 Empowering students with comprehensive academic management tools
               </p>
@@ -26,12 +59,13 @@ const About = () => {
               <Card.Body>
                 <h3 className="text-primary mb-3">Our Mission</h3>
                 <p>
-                  To provide students with a centralized platform that simplifies 
-                  academic management, enhances learning experiences, and fosters 
-                  educational success through innovative technology solutions.
+                  To provide students with a centralized platform that
+                  simplifies academic management, enhances learning experiences,
+                  and fosters educational success through innovative technology
+                  solutions.
                 </p>
                 <p>
-                  We believe in making education more accessible, organized, and 
+                  We believe in making education more accessible, organized, and
                   efficient for every student.
                 </p>
               </Card.Body>
@@ -42,12 +76,12 @@ const About = () => {
               <Card.Body>
                 <h3 className="text-success mb-3">Our Vision</h3>
                 <p>
-                  To be the leading student portal that transforms how students 
-                  interact with their academic journey, creating seamless 
+                  To be the leading student portal that transforms how students
+                  interact with their academic journey, creating seamless
                   connections between students, educators, and institutions.
                 </p>
                 <p>
-                  We envision a future where every student has the tools they 
+                  We envision a future where every student has the tools they
                   need to succeed at their fingertips.
                 </p>
               </Card.Body>
@@ -67,8 +101,8 @@ const About = () => {
                   </div>
                   <h4>Course Management</h4>
                   <p className="text-muted">
-                    Easily track your courses, assignments, and academic progress 
-                    all in one place.
+                    Easily track your courses, assignments, and academic
+                    progress all in one place.
                   </p>
                 </div>
               </Col>
@@ -79,7 +113,7 @@ const About = () => {
                   </div>
                   <h4>Student Community</h4>
                   <p className="text-muted">
-                    Connect with fellow students, form study groups, and 
+                    Connect with fellow students, form study groups, and
                     collaborate on projects.
                   </p>
                 </div>
@@ -91,7 +125,7 @@ const About = () => {
                   </div>
                   <h4>Performance Analytics</h4>
                   <p className="text-muted">
-                    Get detailed insights into your academic performance and 
+                    Get detailed insights into your academic performance and
                     identify areas for improvement.
                   </p>
                 </div>
@@ -141,8 +175,10 @@ const About = () => {
             <Row className="justify-content-center">
               <Col md={3} className="text-center mb-4">
                 <div className="mb-3">
-                  <div className="bg-primary rounded-circle mx-auto d-flex align-items-center justify-content-center" 
-                       style={{width: '100px', height: '100px'}}>
+                  <div
+                    className="bg-primary rounded-circle mx-auto d-flex align-items-center justify-content-center"
+                    style={{ width: "100px", height: "100px" }}
+                  >
                     <i className="fas fa-user fa-3x text-white"></i>
                   </div>
                 </div>
@@ -151,8 +187,10 @@ const About = () => {
               </Col>
               <Col md={3} className="text-center mb-4">
                 <div className="mb-3">
-                  <div className="bg-success rounded-circle mx-auto d-flex align-items-center justify-content-center" 
-                       style={{width: '100px', height: '100px'}}>
+                  <div
+                    className="bg-success rounded-circle mx-auto d-flex align-items-center justify-content-center"
+                    style={{ width: "100px", height: "100px" }}
+                  >
                     <i className="fas fa-headset fa-3x text-white"></i>
                   </div>
                 </div>
@@ -161,8 +199,10 @@ const About = () => {
               </Col>
               <Col md={3} className="text-center mb-4">
                 <div className="mb-3">
-                  <div className="bg-warning rounded-circle mx-auto d-flex align-items-center justify-content-center" 
-                       style={{width: '100px', height: '100px'}}>
+                  <div
+                    className="bg-warning rounded-circle mx-auto d-flex align-items-center justify-content-center"
+                    style={{ width: "100px", height: "100px" }}
+                  >
                     <i className="fas fa-lightbulb fa-3x text-white"></i>
                   </div>
                 </div>
