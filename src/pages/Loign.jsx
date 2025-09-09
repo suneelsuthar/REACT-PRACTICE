@@ -1,40 +1,61 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Card, Alert } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router';
-import Header from '../components/Nabar';
+import React, { useState, useContext, useEffect } from "react";
+import {
+  Container,
+  Row,
+  Col,
+  Form,
+  Button,
+  Card,
+  Alert,
+} from "react-bootstrap";
+import { Link, useNavigate } from "react-router";
+import Header from "../components/Nabar";
+import MyContext from "../context/MyContext";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { user, loginUser } = useContext(MyContext);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       // Add your Firebase authentication logic here
-      console.log('Login attempt:', formData);
+      console.log("Login attempt:", formData);
+      loginUser(formData.email, formData.password);
       // navigate('/home');
     } catch (err) {
-      setError('Failed to log in. Please check your credentials.');
+      setError("Failed to log in. Please check your credentials.");
     } finally {
       setLoading(false);
     }
   };
+
+  console.log(user);
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    } else {
+      navigate("/login");
+    }
+  }, [user]);
 
   return (
     <>
@@ -46,7 +67,7 @@ const Login = () => {
               <Card.Body>
                 <h2 className="text-center mb-4">Login</h2>
                 {error && <Alert variant="danger">{error}</Alert>}
-                
+
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
@@ -64,7 +85,7 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <div className="position-relative">
                       <Form.Control
-                        type={showPassword ? 'text' : 'password'}
+                        type={showPassword ? "text" : "password"}
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
@@ -75,10 +96,10 @@ const Login = () => {
                         variant="outline-secondary"
                         size="sm"
                         className="position-absolute end-0 top-50 translate-middle-y me-2"
-                        style={{ border: 'none' }}
+                        style={{ border: "none" }}
                         onClick={() => setShowPassword(!showPassword)}
                       >
-                        {showPassword ? '👁️' : '👁️‍🗨️'}
+                        {showPassword ? "👁️" : "👁️‍🗨️"}
                       </Button>
                     </div>
                   </Form.Group>
@@ -88,13 +109,17 @@ const Login = () => {
                     type="submit"
                     className="w-100 mb-3"
                     disabled={loading}
+                    onClick={handleSubmit}
                   >
-                    {loading ? 'Logging in...' : 'Login'}
+                    {loading ? "Logging in..." : "Login"}
                   </Button>
                 </Form>
 
                 <div className="text-center">
-                  <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+                  <p>
+                    Don't have an account?{" "}
+                    <Link to="/signup">Sign up here</Link>
+                  </p>
                   <Link to="/forgot-password">Forgot Password?</Link>
                 </div>
               </Card.Body>

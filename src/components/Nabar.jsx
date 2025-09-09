@@ -1,16 +1,18 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router';
+import MyContext from '../context/MyContext';
 
 function Header() {
   const location = useLocation();
+  const { user } = useContext(MyContext);
 
   return (
     <Navbar bg="primary" variant="dark" expand="lg" className="shadow-sm">
       <Container>
         <Navbar.Brand as={Link} to="/" className="fw-bold">
           <i className="fas fa-graduation-cap me-2"></i>
-          Student Portal
+          Student Portal {user?.email}
         </Navbar.Brand>
         
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

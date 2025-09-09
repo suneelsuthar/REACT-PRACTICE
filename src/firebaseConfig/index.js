@@ -4,6 +4,7 @@ import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   // user your own credentials
+ 
 };
 
 // Initialize Firebase

@@ -1,15 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Header from "../components/Nabar";
 import MyContext from "../context/MyContext";
+import { useNavigate } from "react-router";
 
 const Home = () => {
-  const { firstname, lastname, email, password } = useContext(MyContext);
-  
+  const { firstname, lastname, email, password, logout, user } =
+    useContext(MyContext);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/home");
+    }
+  }, [user]);
+
   return (
     <>
       {/* <Header /> */}
       <Container fluid className="p-0">
+        <Header />
+        <button onClick={() => logout()}>logout</button>
         {/* Hero Section */}
         <div className="bg-primary text-white py-5 mb-4">
           <Container>
@@ -45,7 +59,7 @@ const Home = () => {
               <p className="text-muted">email:{email}</p>
               <p className="text-muted">password:{password}</p>
 
-              <input type="password" value={password}  disabled/>
+              <input type="password" value={password} disabled />
             </Col>
           </Row>
 
